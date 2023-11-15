@@ -1,18 +1,16 @@
-<script >
-import mainView from './components/view/mainView.vue'
+<script>
+import mainView from "./components/view/mainView.vue";
 export default {
   components: {
-    mainView
+    mainView,
   },
-}
+};
 </script>
 
 <template>
-<div>
+  <div>
     <mainView />
-</div>
+  </div>
 </template>
 
-<style scoped>
-
-</style>
+<style dscoped></style>

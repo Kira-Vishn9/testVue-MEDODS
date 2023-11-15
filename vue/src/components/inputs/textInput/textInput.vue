@@ -1,20 +1,23 @@
 <script>
-import { defineComponent } from 'vue';
+import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: 'textInput',
+  name: "textInput",
   props: {
     modelValue: String,
     placeholder: {
       type: String,
-      default: 'placeholder',
+      default: "placeholder",
     },
   },
-  emits: ['update:modelValue'],
+  emits: ["update:modelValue", "onChangeValidation"],
 
   methods: {
     emitInput(event) {
-      this.$emit('update:modelValue', event.target.value);
+      if (event.target.value.length === 0) {
+        this.$emit("onChangeValidation");
+      }
+      this.$emit("update:modelValue", event.target.value);
     },
   },
 });
@@ -22,9 +25,13 @@ export default defineComponent({
 
 <template>
   <div>
-    <input type="text" v-model="modelValue" @input="emitInput" :placeholder="placeholder" />
+    <input
+      type="text"
+      :value="modelValue"
+      @input="emitInput"
+      :placeholder="placeholder"
+    />
   </div>
 </template>
 
-<style scoped>
-</style>
+<style scoped></style>

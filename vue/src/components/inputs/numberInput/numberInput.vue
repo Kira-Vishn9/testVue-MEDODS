@@ -1,36 +1,37 @@
 <script>
-import { defineComponent } from 'vue';
+import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: 'numberInput',
+  name: "numberInput",
   props: {
     modelValue: {
       type: [Number, String],
-      default: '',
+      default: "",
     },
     placeholder: {
       type: String,
-      default: 'placeholder',
+      default: "placeholder",
     },
   },
-  emits: ['update:modelValue'],
-  computed: {
-    inputValue: {
-      get() {
-        return this.modelValue;
-      },
-      set(value) {
-        this.$emit('update:modelValue', value);
-      },
+  emits: ["update:modelValue", "onChangeValidation"],
+  methods: {
+    emitInput(event) {
+      if (event.target.value.length === 0) {
+        this.$emit("onChangeValidation");
+      }
+      this.$emit("update:modelValue", event.target.value);
     },
   },
 });
 </script>
 
 <template>
- <input type="number" v-model="inputValue" :placeholder="placeholder"/>
+  <input
+    type="number"
+    :value="modelValue"
+    @input="emitInput"
+    :placeholder="placeholder"
+  />
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

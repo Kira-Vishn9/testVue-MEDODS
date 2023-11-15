@@ -1,22 +1,22 @@
 <script>
-import { defineComponent } from 'vue';
+import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: 'checkbox',
+  name: "checkbox",
   props: {
     modelValue: {
       type: Boolean,
       default: false,
     },
   },
-  emits: ['update:modelValue'],
+  emits: ["update:modelValue"],
   computed: {
     isChecked: {
       get() {
         return this.modelValue;
       },
       set(value) {
-        this.$emit('update:modelValue', value);
+        this.$emit("update:modelValue", value);
       },
     },
   },
@@ -29,9 +29,7 @@ export default defineComponent({
 </script>
 
 <template>
- <input type="checkbox" :placeholder="placeholder"  :checked="isChecked" @change="handleChange"/>
+  <input type="checkbox" :checked="isChecked" @change="handleChange" />
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

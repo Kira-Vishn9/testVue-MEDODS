@@ -1,5 +1,5 @@
 <script>
-import { defineComponent } from 'vue';
+import { defineComponent } from "vue";
 
 export default defineComponent({
   props: {
@@ -7,22 +7,20 @@ export default defineComponent({
     name: String,
     options: Array,
   },
-  emits: ['update:modelValue'],
-  computed: {
-    selectedValue: {
-      get() {
-        return this.modelValue;
-      },
-      set(value) {
-        this.$emit('update:modelValue', value);
-      },
+  emits: ["update:modelValue", "onChangeValidation"],
+  methods: {
+    emitInput(event) {
+      if (event.target.value === "") {
+        this.$emit("onChangeValidation");
+      }
+      this.$emit("update:modelValue", event.target.value);
     },
   },
 });
 </script>
 
 <template>
-  <select v-model="selectedValue">
+  <select v-model="selectedValue" @change="emitInput">
     <option :value="''">{{ name }}</option>
     <option v-for="item in options" :value="item" :key="item">
       {{ item }}
@@ -30,6 +28,4 @@ export default defineComponent({
   </select>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

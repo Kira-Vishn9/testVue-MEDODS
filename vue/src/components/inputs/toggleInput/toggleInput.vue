@@ -1,16 +1,16 @@
 <script>
-import { defineComponent } from 'vue';
+import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: 'toggleInput',
+  name: "toggleInput",
   props: {
-    value: Boolean,
+    checked: Boolean,
   },
-  emits: ['update:value'],
+  emits: ["update:value"],
   methods: {
     onChange(event) {
       if (!(event.target instanceof HTMLInputElement)) return;
-      this.$emit('update:value', event.target.checked);
+      this.$emit("update:value", event.target.checked);
     },
   },
 });
@@ -19,16 +19,12 @@ export default defineComponent({
 <template>
   <div class="container1">
     <label class="switch">
-      <input type="checkbox" v-model="checked" @change="onChange" />
+      <input type="checkbox" :value="checked" @change="onChange" />
       <span class="slider round"></span>
     </label>
     <div class="wrap_toggle">
-      <span class="title_toggle" :class="{ active: checked }">
-        male
-      </span>
-      <p class="text" :class="{ active: !checked }">
-        female
-      </p>
+      <span class="title_toggle" :class="{ active: checked }"> male </span>
+      <p class="text" :class="{ active: !checked }">female</p>
     </div>
   </div>
 </template>
@@ -38,7 +34,7 @@ export default defineComponent({
   margin-left: 6px;
   .title_toggle {
     color: #000;
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-size: 16px;
     font-style: normal;
     font-weight: 500;
@@ -46,7 +42,7 @@ export default defineComponent({
   }
   .text {
     color: #696977;
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
@@ -82,7 +78,7 @@ export default defineComponent({
 
     &:before {
       position: absolute;
-      content: '';
+      content: "";
       height: 17px;
       width: 17px;
       left: -5px;

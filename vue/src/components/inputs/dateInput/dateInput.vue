@@ -1,35 +1,30 @@
 <script>
-import { defineComponent } from 'vue';
+import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: 'dateInput',
+  name: "dateInput",
   props: {
     modelValue: {
-      type: String, // Assuming the date is represented as a string
-      default: '',
+      type: String,
+      default: "",
     },
   },
-  emits: ['update:modelValue'],
-  computed: {
-    selectedDate: {
-      get() {
-        return this.modelValue;
-      },
-      set(value) {
-        this.$emit('update:modelValue', value);
-      },
+  emits: ["update:modelValue", "onChangeValidation"],
+  methods: {
+    emitInput(event) {
+      if (event.target.value === "") {
+        this.$emit("onChangeValidation");
+      }
+      this.$emit("update:modelValue", event.target.value);
     },
   },
 });
 </script>
 
-
 <template>
   <div>
-    <input type="date" v-model="selectedDate">
+    <input type="date" :value="modelValue" @input="emitInput" />
   </div>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>
