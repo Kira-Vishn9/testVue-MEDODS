@@ -18,13 +18,13 @@ export default defineComponent({
 
 <template>
   <div class="container1">
+    <span class="text" :class="{ active: !checked }">female</span>
     <label class="switch">
-      <input type="checkbox" :value="checked" @change="onChange" />
+      <input type="checkbox" :checked="checked" @change="onChange" />
       <span class="slider round"></span>
     </label>
     <div class="wrap_toggle">
       <span class="title_toggle" :class="{ active: checked }"> male </span>
-      <p class="text" :class="{ active: !checked }">female</p>
     </div>
   </div>
 </template>
@@ -53,6 +53,7 @@ export default defineComponent({
 
 .container1 {
   display: flex;
+  align-items: center;
 }
 
 .switch {

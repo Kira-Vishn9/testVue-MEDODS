@@ -1,18 +1,16 @@
 <script>
-import {defineComponent} from 'vue'
-import myForm from '../form/myForm.vue'
+import { defineComponent } from "vue";
+import myForm from "../form/myForm.vue";
 
 export default defineComponent({
   components: {
-    myForm
-  }
-})
+    myForm,
+  },
+});
 </script>
 
 <template>
-    <myForm />
+  <myForm />
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

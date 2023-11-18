@@ -22,9 +22,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <div>
-    <input type="date" :value="modelValue" @input="emitInput" />
-  </div>
+  <input type="date" :value="modelValue" @input="emitInput" />
 </template>
 
 <style scoped></style>
