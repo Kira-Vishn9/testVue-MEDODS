@@ -17,7 +17,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="container1">
+  <div class="container">
     <span class="text" :class="{ active: !checked }">female</span>
     <label class="switch">
       <input type="checkbox" :checked="checked" @change="onChange" />
@@ -29,85 +29,77 @@ export default defineComponent({
   </div>
 </template>
 
-<style lang="scss" scoped>
-.wrap_toggle {
-  margin-left: 6px;
-  .title_toggle {
-    color: #000;
-    font-family: "Montserrat", sans-serif;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 19px;
-  }
-  .text {
-    color: #696977;
-    font-family: "Montserrat", sans-serif;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 19px;
-    letter-spacing: -0.021px;
-  }
-}
+<style lang="sass">
 
-.container1 {
-  display: flex;
-  align-items: center;
-}
+.wrap_toggle
+  margin-left: 6px
 
-.switch {
-  position: relative;
-  display: inline-block;
-  width: 39px;
-  height: 19px;
-  input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-  }
+  .title_toggle
+    color: #000
+    font-family: "Montserrat", sans-serif
+    font-size: 16px
+    font-style: normal
+    font-weight: 500
+    line-height: 19px
 
-  .slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #ccc;
-    transition: 0.4s;
+  .text
+    color: #696977
+    font-family: "Montserrat", sans-serif
+    font-size: 14px
+    font-style: normal
+    font-weight: 400
+    line-height: 19px
+    letter-spacing: -0.021px
 
-    &:before {
-      position: absolute;
-      content: "";
-      height: 17px;
-      width: 17px;
-      left: -5px;
-      bottom: 1px;
-      background-color: white;
-      transition: 0.4s;
-      margin-right: 5px;
-    }
-  }
+.container
+  display: flex
+  align-items: center
+  justify-content: center
 
-  input:checked + .slider {
-    background-color: #2196f3;
-  }
+.container .switch
+  position: relative
+  display: inline-block
+  width: 39px
+  height: 19px
 
-  input:focus + .slider {
-    box-shadow: 0 0 1px #2196f3;
-  }
+  input
+    opacity: 0
+    width: 0
+    height: 0
 
-  input:checked + .slider:before {
-    transform: translateX(26px);
-  }
+  .slider
+    position: absolute
+    cursor: pointer
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    background-color: #ccc
+    transition: 0.4s
 
-  .slider.round {
-    border-radius: 34px;
-  }
+    &:before
+      position: absolute
+      content: ""
+      height: 17px
+      width: 17px
+      left: -5px
+      bottom: 1px
+      background-color: white
+      transition: 0.4s
+      margin-right: 5px
 
-  .slider.round:before {
-    border-radius: 50%;
-  }
-}
+  input:checked + .slider
+    background-color: #2196f3
+
+  input:focus + .slider
+    box-shadow: 0 0 1px #2196f3
+
+  input:checked + .slider:before
+    transform: translateX(26px)
+
+  .slider.round
+    border-radius: 34px
+
+  .slider.round:before
+    border-radius: 50%
 </style>

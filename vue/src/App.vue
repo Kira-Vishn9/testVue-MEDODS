@@ -13,4 +13,4 @@ export default {
   </div>
 </template>
 
-<style dscoped></style>
+<style></style>

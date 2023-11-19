@@ -15,15 +15,13 @@ export default defineComponent({
   <div>
     <p>{{ nameTitle }}</p>
     <slot> </slot>
-
-    <div class="input-errors">
-      <div class="error">{{ message }}</div>
-    </div>
+    <div class="error">{{ message }}</div>
   </div>
 </template>
 
-<style lang="scss" scoped>
-.error {
-  color: red;
-}
+<style lang="sass">
+.error
+  color: red
+  position: relative
+  margin-top: 10px
 </style>

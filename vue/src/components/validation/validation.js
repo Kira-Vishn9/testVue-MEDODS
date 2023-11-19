@@ -1,31 +1,28 @@
+function validateLength(name) {
+  return name.length >= 3;
+}
+function validateAlphabeticInput(value) {
+  return /^[a-zA-Z]+$/.test(value);
+}
+
 function validateRussianPhoneNumber(phoneNumber) {
-  var pattern = /^(\+7|8)[\s-]?\d{3}[\s-]?\d{3}[\s-]?\d{2}[\s-]?\d{2}$/;
-
-  return pattern.test(phoneNumber);
+  return /^7|8\d{10}$/.test(phoneNumber);
 }
 
-function validateBirthday(birthday) {
-  var inputDate = new Date(birthday);
-  var currentDate = new Date();
-  return inputDate <= currentDate;
+function validateToFuture(birthday) {
+  return new Date(birthday) <= new Date();
 }
 
-function validatePassportIssueDate(issueDate) {
-  var issueDateObj = new Date(issueDate);
-  var currentDate = new Date();
-  if (issueDateObj > currentDate) {
-    return false;
-  }
-
-  var maxIssueAge = 10 * 365 * 24 * 60 * 60 * 1000;
-  if (currentDate - issueDateObj > maxIssueAge) {
-    return false;
-  }
-  return true;
+function validateTooOld(passportIssueDate) {
+  const currentYear = new Date().getFullYear();
+  const yearsDiff = currentYear - passportIssueDate.slice(0, 4);
+  return yearsDiff <= 10;
 }
 
 export default {
+  validateAlphabeticInput,
+  validateLength,
   validateRussianPhoneNumber,
-  validateBirthday,
-  validatePassportIssueDate,
+  validateToFuture,
+  validateTooOld,
 };

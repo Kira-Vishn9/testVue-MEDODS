@@ -29,7 +29,22 @@ export default defineComponent({
 </script>
 
 <template>
-  <input type="checkbox" :checked="isChecked" @change="handleChange" />
+  <label class="sms_Checkbox" for="smsCheckbox">
+    <input
+      type="checkbox"
+      id="smsCheckbox"
+      v-model="isChecked"
+      @change="handleChange"
+    />
+    Не отправлять СМС</label
+  >
 </template>
 
-<style scoped></style>
+<style lang="sass">
+.sms_Checkbox
+  display: flex
+  align-items: center
+  justify-content: center
+  input
+    width: 50px
+</style>

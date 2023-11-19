@@ -13,4 +13,4 @@ export default defineComponent({
   <myForm />
 </template>
 
-<style scoped></style>
+<style></style>

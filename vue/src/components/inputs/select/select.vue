@@ -28,4 +28,4 @@ export default defineComponent({
   </select>
 </template>
 
-<style scoped></style>
+<style></style>

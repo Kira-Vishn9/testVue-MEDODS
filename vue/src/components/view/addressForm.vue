@@ -20,6 +20,10 @@ export default defineComponent({
         region: "",
         city: {
           required: helpers.withMessage("This field cannot be empty", required),
+          customValidation: helpers.withMessage(
+            "Too short",
+            myValidation.validateLength,
+          ),
           $lazy: true,
         },
         street: "",
@@ -42,7 +46,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <div>
+  <div class="wrap--address">
     <numberInput
       v-model="addressModel.indexAddress"
       :placeholder="numberInputPlaceHolderIndexAddress"
@@ -74,4 +78,20 @@ export default defineComponent({
   </div>
 </template>
 
-<style scoped></style>
+<style lang="sass">
+.wrap--address
+  position: relative
+  border: 0 solid
+  border-radius: 25px
+  background-color: rgba(255, 255, 255, 0.5)
+  display: grid
+  grid-template-columns: 1fr 1fr
+  padding: 20px
+  justify-items: center
+  gap: 20px 10px
+  margin: 10px 0
+@media (max-width: 800px)
+  .wrap--address
+    display: flex
+    flex-direction: column
+</style>

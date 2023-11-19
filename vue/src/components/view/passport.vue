@@ -26,7 +26,14 @@ export default defineComponent({
         passportIssued: "",
         dateOfIssue: {
           required: helpers.withMessage("This field cannot be empty", required),
-          customValidation: myValidation.validatePassportIssueDate,
+          validateToFuture: helpers.withMessage(
+            "You document from future",
+            myValidation.validateToFuture,
+          ),
+          validateTooOld: helpers.withMessage(
+            "You document is too old",
+            myValidation.validateTooOld,
+          ),
           $lazy: true,
         },
       },
@@ -45,17 +52,18 @@ export default defineComponent({
 </script>
 
 <template>
-  <div>
-    <layoutError
-      :message="v$.passportModel.selectedDocumentType.$errors[0]?.$message"
-    >
-      <Select
-        @onChangeValidation="v$.passportModel.selectedDocumentType.$reset()"
-        v-model="passportModel.selectedDocumentType"
-        :options="passportModel.arrayDocuments"
-      />
-    </layoutError>
-
+  <div class="wrap--passport">
+    <div class="select-row">
+      <layoutError
+        :message="v$.passportModel.selectedDocumentType.$errors[0]?.$message"
+      >
+        <Select
+          @onChangeValidation="v$.passportModel.selectedDocumentType.$reset()"
+          v-model="passportModel.selectedDocumentType"
+          :options="passportModel.arrayDocuments"
+        />
+      </layoutError>
+    </div>
     <textInput
       v-model="passportModel.passportSeries"
       :placeholder="textInputPlaceHolderPassportSeries"
@@ -68,6 +76,7 @@ export default defineComponent({
       v-model="passportModel.passportIssued"
       :placeholder="textInputPlaceHolderPassportIssued"
     />
+
     <layoutError :message="v$.passportModel.dateOfIssue.$errors[0]?.$message">
       <dateInput
         @onChangeValidation="v$.passportModel.dateOfIssue.$reset()"
@@ -76,6 +85,31 @@ export default defineComponent({
       />
     </layoutError>
   </div>
+  <!--  </div>-->
 </template>
 
-<style scoped></style>
+<style lang="sass">
+
+.wrap--passport
+  background-color: rgba(255, 255, 255, 0.5)
+  padding: 20px
+  border: 0 solid
+  border-radius: 25px
+  display: grid
+  grid-template-columns: 1fr 1fr
+  justify-items: center
+  gap: 10px 10px
+  margin: 10px 0
+.wrap--passport :has(input, select)
+  max-width: 100%
+  width: 100%
+
+.select-row
+  grid-column: span 2
+  width: 100%
+  text-align: -webkit-center
+@media (max-width: 800px)
+  .wrap--passport
+    display: flex
+    flex-direction: column
+</style>

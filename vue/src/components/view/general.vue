@@ -29,21 +29,43 @@ export default defineComponent({
       generalModel: {
         name: {
           required: helpers.withMessage("This field cannot be empty", required),
+          customValidationLength: helpers.withMessage(
+            "Too short name",
+            myValidation.validateLength,
+          ),
+          customValidationAlphabetic: helpers.withMessage(
+            "Нou are using incorrect characters",
+            myValidation.validateAlphabeticInput,
+          ),
           $lazy: true,
         },
         lastName: {
           required: helpers.withMessage("This field cannot be empty", required),
           $lazy: true,
+          customValidation: helpers.withMessage(
+            "Too short lastname",
+            myValidation.validateLength,
+          ),
+          customValidationAlphabetic: helpers.withMessage(
+            "You are using incorrect characters",
+            myValidation.validateAlphabeticInput,
+          ),
         },
         middleName: "",
         dateOfBirth: {
           required: helpers.withMessage("This field cannot be empty", required),
-          customValidation: myValidation.validateBirthday,
+          customValidation: helpers.withMessage(
+            "Your birthday can't be in the future",
+            myValidation.validateToFuture,
+          ),
           $lazy: true,
         },
         phoneNumber: {
           required: helpers.withMessage("This field cannot be empty", required),
-          customValidation: myValidation.validateRussianPhoneNumber,
+          customValidation: helpers.withMessage(
+            "Phone number is incorrect",
+            myValidation.validateRussianPhoneNumber,
+          ),
           $lazy: true,
         },
         selectedClient: {
@@ -71,90 +93,102 @@ export default defineComponent({
 
 <template>
   <div class="wrap--general">
-    <layoutError :message="v$.generalModel.name.$errors[0]?.$message">
+    <h2>General form</h2>
+    <div class="wrap--content">
+      <layoutError :message="v$.generalModel.name.$errors[0]?.$message">
+        <textInput
+          @onChangeValidation="v$.generalModel.name.$reset()"
+          v-model="generalModel.name"
+          :placeholder="textInputPlaceHolderName"
+        />
+      </layoutError>
+
+      <layoutError :message="v$.generalModel.lastName.$errors[0]?.$message">
+        <textInput
+          @onChangeValidation="v$.generalModel.lastName.$reset()"
+          v-model="generalModel.lastName"
+          :placeholder="textInputPlaceHolderLastName"
+        />
+      </layoutError>
+
       <textInput
-        @onChangeValidation="v$.generalModel.name.$reset()"
-        v-model="generalModel.name"
-        :placeholder="textInputPlaceHolderName"
+        v-model="generalModel.middleName"
+        :placeholder="textInputPlaceHolderMiddleName"
       />
-    </layoutError>
+      <layoutError :message="v$.generalModel.dateOfBirth.$errors[0]?.$message">
+        <dateInput
+          @onChangeValidation="v$.generalModel.dateOfBirth.$reset()"
+          v-model="generalModel.dateOfBirth"
+          :placeholder="dateInputPlaceHolderDateBirth"
+        />
+      </layoutError>
 
-    <layoutError :message="v$.generalModel.lastName.$errors[0]?.$message">
-      <textInput
-        @onChangeValidation="v$.generalModel.lastName.$reset()"
-        v-model="generalModel.lastName"
-        :placeholder="textInputPlaceHolderLastName"
-      />
-    </layoutError>
+      <layoutError :message="v$.generalModel.phoneNumber.$errors[0]?.$message">
+        <numberInput
+          @onChangeValidation="v$.generalModel.phoneNumber.$reset()"
+          v-model="generalModel.phoneNumber"
+          :placeholder="numberInputPlaceHolderPhone"
+        />
+      </layoutError>
 
-    <textInput
-      v-model="generalModel.middleName"
-      :placeholder="textInputPlaceHolderMiddleName"
-    />
-    <layoutError :message="v$.generalModel.dateOfBirth.$errors[0]?.$message">
-      <dateInput
-        @onChangeValidation="v$.generalModel.dateOfBirth.$reset()"
-        v-model="generalModel.dateOfBirth"
-        :placeholder="dateInputPlaceHolderDateBirth"
-      />
-    </layoutError>
+      <layoutError
+        :message="v$.generalModel.selectedClient.$errors[0]?.$message"
+      >
+        <Select
+          @onChangeValidation="v$.generalModel.selectedClient.$reset()"
+          v-model="generalModel.selectedClient"
+          :options="arrayClients"
+        />
+      </layoutError>
 
-    <layoutError :message="v$.generalModel.phoneNumber.$errors[0]?.$message">
-      <numberInput
-        @onChangeValidation="v$.generalModel.phoneNumber.$reset()"
-        v-model="generalModel.phoneNumber"
-        :placeholder="numberInputPlaceHolderPhone"
+      <div class="select-row">
+        <Select v-model="generalModel.selectedDoctor" :options="arrayDoctors" />
+      </div>
+      <toggleInput
+        @update:value="
+          (a) => {
+            console.log((generalModel.gender = a));
+          }
+        "
+        :checked="generalModel.gender"
       />
-    </layoutError>
 
-    <layoutError :message="v$.generalModel.selectedClient.$errors[0]?.$message">
-      <Select
-        @onChangeValidation="v$.generalModel.selectedClient.$reset()"
-        v-model="generalModel.selectedClient"
-        :options="arrayClients"
-      />
-    </layoutError>
-
-    <div class="select-row">
-      <Select
-        v-model="generalModel.selectedDoctor"
-        :options="generalModel.arrayDoctors"
-      />
+      <checkbox v-model="generalModel.isSubscribed" />
     </div>
-
-    <toggleInput
-      @update:value="
-        (a) => {
-          console.log((generalModel.gender = a));
-        }
-      "
-      :checked="generalModel.gender"
-    />
-
-    <checkbox v-model="generalModel.isSubscribed" />
   </div>
 </template>
 
-<style lang="scss" scoped>
-.wrap--general {
-  border: 0 solid;
-  border-radius: 25px;
-  background-color: rgba(255, 255, 255, 0.5);
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: repeat(4, 2fr) 1fr;
-  padding: 20px;
-  justify-items: center;
-}
-.select-row {
-  grid-column: span 2;
-  width: 100%;
-  text-align: -webkit-center;
-}
-.select-row select {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
+<style lang="sass">
+.wrap--general
+  grid-column: span 2
+  border: 0 solid
+  border-radius: 25px
+  background-color: rgba(255, 255, 255, 0.5)
+
+
+  .wrap--content
+    display: grid
+    grid-template-columns: 1fr 1fr
+    padding: 20px
+    justify-items: center
+    gap: 10px
+    box-sizing: border-box
+
+  .select-row
+    grid-column: span 2
+    width: 100%
+    text-align: -webkit-center
+
+    select
+      width: 100%
+      display: flex
+      flex-direction: column
+      align-items: center
+@media (max-width: 800px)
+  .wrap--general
+    display: flex
+    flex-direction: column
+    .wrap--content
+      display: flex
+      flex-direction: column
 </style>

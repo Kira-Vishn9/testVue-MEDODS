@@ -25,4 +25,4 @@ export default defineComponent({
   <input type="date" :value="modelValue" @input="emitInput" />
 </template>
 
-<style scoped></style>
+<style></style>
