@@ -1,15 +1,15 @@
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
+import game from "./components/game.vue";
 export default {
   components: {
-    HelloWorld,
+    game,
   },
 };
 </script>
 
 <template>
   <div>
-    <HelloWorld />
+    <game />
   </div>
 </template>
 

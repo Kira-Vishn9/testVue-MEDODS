@@ -7,7 +7,7 @@ export default {
   data() {
     return {
       urlSongs: [song1, song2, song3, song4],
-      arrayComputer: [3, 3, 3],
+      arrayComputer: [],
       arrayPlayer: [],
       round: 0,
       activeTiles: Array(4).fill(false),
