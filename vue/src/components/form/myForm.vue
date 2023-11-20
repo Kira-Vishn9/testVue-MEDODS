@@ -37,7 +37,7 @@ export default {
       <general />
       <addressForm />
       <passport />
-      <button type="submit" @click.prevent="submitForm">Log Form Data</button>
+      <button type="submit" @click.prevent="submitForm">Submit</button>
     </form>
   </div>
 </template>
