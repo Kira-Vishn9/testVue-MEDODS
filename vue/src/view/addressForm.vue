@@ -9,7 +9,7 @@ import { addressModel } from "../models/address.js";
 import { useVuelidate } from "@vuelidate/core";
 
 export default {
-  name: "address",
+  name: "formAddress",
   components: { textInput, numberInput, layoutError },
   setup: (_, { refs }) => ({ addressRef: refs, v$: useVuelidate() }),
   validations() {

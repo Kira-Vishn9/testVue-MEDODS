@@ -1,7 +1,7 @@
 <script>
 import Vue from "vue";
 import dateInput from "../components/inputs/dateInput/dateInput.vue";
-import Select from "../components/inputs/select/select.vue";
+import mySelect from "../components/inputs/select/select.vue";
 import layoutError from "../components/layoutError/layoutError.vue";
 import numberInput from "../components/inputs/numberInput/numberInput.vue";
 import textInput from "../components/inputs/textInput/textInput.vue";
@@ -12,7 +12,7 @@ import { useVuelidate } from "@vuelidate/core";
 
 export default {
   name: "Passport",
-  components: { textInput, numberInput, layoutError, Select, dateInput },
+  components: { textInput, numberInput, layoutError, mySelect, dateInput },
   setup: (_, { refs }) => ({ passportRef: refs, v$: useVuelidate() }),
   validations() {
     return {
@@ -57,7 +57,7 @@ export default {
       <layoutError
         :message="v$.passportModel.selectedDocumentType.$errors[0]?.$message"
       >
-        <Select
+        <mySelect
           @onChangeValidation="v$.passportModel.selectedDocumentType.$reset()"
           v-model="passportModel.selectedDocumentType"
           :options="passportModel.arrayDocuments"

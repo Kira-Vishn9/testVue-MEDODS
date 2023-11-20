@@ -2,7 +2,7 @@
 import Vue from "vue";
 import DateInput from "../components/inputs/dateInput/dateInput.vue";
 import ToggleInput from "../components/inputs/toggleInput/toggleInput.vue";
-import Select from "../components/inputs/select/select.vue";
+import mySelect from "../components/inputs/select/select.vue";
 import LayoutError from "../components/layoutError/layoutError.vue";
 import NumberInput from "../components/inputs/numberInput/numberInput.vue";
 import Checkbox from "../components/inputs/checkbox/checkbox.vue";
@@ -17,7 +17,7 @@ export default {
   components: {
     DateInput,
     ToggleInput,
-    Select,
+    mySelect,
     LayoutError,
     NumberInput,
     Checkbox,
@@ -134,15 +134,18 @@ export default {
       <layoutError
         :message="v$.generalModel.selectedClient.$errors[0]?.$message"
       >
-        <Select
+        <mySelect
           @onChangeValidation="v$.generalModel.selectedClient.$reset()"
-          :modelValue="generalModel.selectedClient"
+          v-model="generalModel.selectedClient"
           :options="arrayClients"
         />
       </layoutError>
 
       <div class="select-row">
-        <Select v-model="generalModel.selectedDoctor" :options="arrayDoctors" />
+        <mySelect
+          v-model="generalModel.selectedDoctor"
+          :options="arrayDoctors"
+        />
       </div>
       <toggleInput
         @update:value="
