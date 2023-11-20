@@ -25,7 +25,7 @@ export default {
 <template>
   <input
     type="number"
-    v-model="value"
+    :value="value"
     @input="emitInput"
     :placeholder="placeholder"
   />

@@ -6,7 +6,7 @@ function validateAlphabeticInput(value) {
 }
 
 function validateRussianPhoneNumber(phoneNumber) {
-  return /^7|8\d{10}$/.test(phoneNumber);
+  return /^(\+?[78])[\-]?\(?\d{3}\)?[\-]?\d{7}$/.test(phoneNumber);
 }
 
 function validateToFuture(birthday) {

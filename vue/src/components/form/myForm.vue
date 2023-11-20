@@ -20,9 +20,9 @@ export default {
       const isFormCorrect = await this.v$.$validate();
       console.log(
         "тут должна быть функция отправки на какой-нибудь сервер",
-        generalModel.selectedClient,
-        // addressModel,
-        // passportModel,
+        generalModel,
+        addressModel,
+        passportModel,
       );
       this.isSubmit = isFormCorrect;
     },
