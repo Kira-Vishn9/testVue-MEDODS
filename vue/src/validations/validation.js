@@ -2,7 +2,7 @@ function validateLength(name) {
   return name.length >= 3;
 }
 function validateAlphabeticInput(value) {
-  return /^[a-zA-Z]+$/.test(value);
+  return /^[a-zA-Zа-яА-Я]+$/.test(value);
 }
 
 function validateRussianPhoneNumber(phoneNumber) {
