@@ -23,7 +23,7 @@ export default {
       :checked="value"
       @change="handleChange"
     />
-    Не отправлять СМС</label
+    don't send SMS</label
   >
 </template>
 
